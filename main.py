@@ -46,11 +46,12 @@ with placeholder.container():
                             answer_content += mes.get_result()
                             placeholder.write(answer_content) 
                         placeholder.write(answer_content)
-                        with st.popover(f"{question}:blue[更多解答]"):
-                            st.markdown("### 类似相关问题")
-                            for i in result[1][1]:
-                                st.markdown(f":blue[{i}]")
-                                st.divider()
+                        if len(result[1])>=1:
+                            with st.popover(f"{question}:blue[更多解答]"):
+                                st.markdown("### 类似相关问题")
+                                for i in result[1][1]:
+                                    st.markdown(f":blue[{i}]")
+                                    st.divider()
                         st.divider()
                         st.markdown("* 法律答案由:gray[AI-律小法]生成")
                         st.markdown("* 答案有ai生成仅供参考，不承担任何法律责任")
