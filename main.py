@@ -49,7 +49,7 @@ with placeholder.container():
                         if len(result[1])>=1:
                             with st.popover(f"{question}:blue[更多解答]"):
                                 st.markdown("### 类似相关问题")
-                                for i in result[1][1]:
+                                for i in result[1][2]:
                                     st.markdown(f":blue[{i}]")
                                     st.divider()
                         st.divider()

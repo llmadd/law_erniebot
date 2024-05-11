@@ -53,15 +53,19 @@ class BingCustomSearch_tool():
         print(search_results)
         load_search_data = []
         load_search_url = []
+        load_search_name = []
         if "webPages" in search_results:
             for item in search_results["webPages"]["value"]:
                 url= item["url"]
+                name = item["name"]
                 snippet = item["snippet"]
                 # 正则表达式去除Html标签
                 snippet = re.sub('<.*?>', '', snippet)
+                name = re.sub('<.*?>', '', name)
+                load_search_name.append(name)
                 load_search_data.append(snippet)
                 load_search_url.append(url)
-            return load_search_data,load_search_url
+            return load_search_data,load_search_url,load_search_name
         else:
             search_res = " "
             return search_res
@@ -152,18 +156,22 @@ class Bing_search():
         r = requests.get(url, headers=headers,params=params,timeout=50000)
         r.raise_for_status()
         search_results = r.json()
+        # print(search_results)
         load_search_data = []
         load_search_url = []
-
+        load_search_name = []
         if "webPages" in search_results:
             for item in search_results["webPages"]["value"]:
                 url= item["url"]
+                name = item["name"]
                 snippet = item["snippet"]
                 # 正则表达式去除Html标签
                 snippet = re.sub('<.*?>', '', snippet)
+                name = re.sub('<.*?>', '', name)
+                load_search_name.append(name)
                 load_search_data.append(snippet)
                 load_search_url.append(url)
-            return load_search_data,load_search_url
+            return load_search_data,load_search_url,load_search_name
         else:
             search_res = " "
             return search_res
@@ -237,8 +245,8 @@ class Bing_search():
 ### TEST ####
 #############
 # s = time.time()
-# BS = Bing_search(subscription_key = "")
-# res = BS.run("如何支付加班费")
-# print(res[2])
+# BS = Bing_search(subscription_key = "b51039a4f8c445458edf5744a72d8e25")
+# res = BS.get_search("如何支付加班费",count=1)
+# print(res)
 # e = time.time()
 # print(e-s)
