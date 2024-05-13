@@ -4,7 +4,8 @@ import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import streamlit as st
-from work import xf_audio, work, mysql_db
+from work import xf_audio
+from work import work, mysql_db
 import os
 from streamlit_mic_recorder import mic_recorder
 import pymysql
@@ -37,8 +38,8 @@ with sidebar:
 law_chatbot = work.Law_Work(access_token=st.session_state["token"])
 
 question_placeholder = st.empty()
-with question_placeholder:
-    question = st.text_input("请输入咨询的法律问题：", st.session_state["question"],key = "text")
+
+question = question_placeholder.text_input("请输入咨询的法律问题：", st.session_state["question"])
 # st.divider()
 col1, col2= st.columns([0.9, 0.1])
 with col1:
@@ -51,7 +52,7 @@ with col1:
     callback=None,
     args=(),
     kwargs={},
-    key=None)
+    key="audio")
 with col2:
     button = st.button("提交", type="primary")
 
@@ -66,9 +67,8 @@ if audio:
                                 api_key=os.getenv("XF_APIKey"), audio_bytes = st.session_state.audio_bytes)
     recognizer.run()
     st.session_state["question"] = recognizer.get_result()
-    with question_placeholder:
-        question_placeholder.empty()
-        question = st.text_input("请输入咨询的法律问题：", st.session_state["question"], key = ["audio"])
+
+    question = question_placeholder.text_input("请输入咨询的法律问题：", st.session_state["question"], key = 1)
 
 
 placeholder = st.empty()
