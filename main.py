@@ -17,8 +17,8 @@ st.markdown('结合:blue[百万有效法律法规数据]以及:blue[实时数据
 
 if "token" not in st.session_state:
     st.session_state["token"] = ""
-if "question" not in st.session_state:
-    st.session_state["question"] = "如何支付加班费？"
+# if "question" not in st.session_state:
+#     st.session_state["question"] = "如何支付加班费？"
 if "audio_bytes" not in st.session_state:
     st.session_state.audio_bytes = ""
 sidebar = st.sidebar
@@ -39,7 +39,7 @@ law_chatbot = work.Law_Work(access_token=st.session_state["token"])
 
 question_placeholder = st.empty()
 
-question = question_placeholder.text_input("请输入咨询的法律问题：", st.session_state["question"])
+question = question_placeholder.text_input("请输入咨询的法律问题：", "如何支付加班费？")
 # st.divider()
 col1, col2= st.columns([0.9, 0.1])
 with col1:
@@ -66,9 +66,9 @@ if audio:
     recognizer = xf_audio.SpeechRecognizer(appid=os.getenv("XF_APPID"), api_secret=os.getenv("XF_APISecret"),
                                 api_key=os.getenv("XF_APIKey"), audio_bytes = st.session_state.audio_bytes)
     recognizer.run()
-    st.session_state["question"] = recognizer.get_result()
+    # st.session_state["question"] = recognizer.get_result()
 
-    question = question_placeholder.text_input("请输入咨询的法律问题：", st.session_state["question"], key = 1)
+    question = question_placeholder.text_input("请输入咨询的法律问题：", recognizer.get_result(), key = 1)
 
 
 placeholder = st.empty()
