@@ -7,3 +7,4 @@ pysqlite3-binary
 openai==1.23.6
 streamlit_mic_recorder
 pydub
+pymysql
