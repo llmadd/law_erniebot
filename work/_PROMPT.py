@@ -9,7 +9,7 @@ FIRST_SYSTEM_PROMPT = """
 """
 FIRST_USER_PROMPT = """
 判断下面用户问题是否为法律问题，并以json格式返回。\n
-用户问题：{question}\n
+用户问题：法律意义上{question}\n
 json答案格式：\n
     {{
         law_question: true # 是否为法律问题
