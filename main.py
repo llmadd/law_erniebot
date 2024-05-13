@@ -4,8 +4,7 @@ import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import streamlit as st
-from Law_APP.work import xf_audio
-from work import work, mysql_db
+from work import xf_audio, work, mysql_db
 import os
 from streamlit_mic_recorder import mic_recorder
 import pymysql
